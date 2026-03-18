@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fahad Zaman — AI Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,300;1,8..60,400&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #080C10;
+      --bg2: #0D1117;
+      --bg3: #111820;
+      --surface: #141C24;
+      --border: #1E2A36;
+      --border2: #243040;
+      --accent: #00D4FF;
+      --accent2: #0099BB;
+      --accent3: #00FF88;
+      --text: #E8F0F8;
+      --text2: #8FA8C0;
+      --text3: #506070;
+      --red: #FF4466;
+      --orange: #FF8844;
+      --purple: #9955FF;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Noise overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.4;
+    }
+
+    /* Grid background */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 20px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(20px);
+      background: rgba(8, 12, 16, 0.8);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Lora', Georgia, serif;
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text2);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-cta {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: 8px 20px;
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: all 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 60px 80px;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 212, 255, 0.08) 0%, transparent 70%);
+      top: 50%;
+      right: -100px;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .hero-glow2 {
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(0, 255, 136, 0.05) 0%, transparent 70%);
+      bottom: 0;
+      left: 200px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 760px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      padding: 6px 14px;
+      border: 1px solid rgba(0, 255, 136, 0.2);
+      background: rgba(0, 255, 136, 0.04);
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: var(--accent3);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+      }
+    }
+
+    .hero h1 {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(52px, 7vw, 88px);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -3px;
+      margin-bottom: 28px;
+      color: var(--text);
+    }
+
+    .hero h1 .line2 {
+      display: block;
+      color: transparent;
+      -webkit-text-stroke: 1.5px var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 16px;
+      color: var(--text2);
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 44px;
+    }
+
+    .hero-desc strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--bg);
+      background: var(--accent);
+      border: none;
+      padding: 14px 32px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary:hover {
+      background: #00AACC;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--text2);
+      background: transparent;
+      border: 1px solid var(--border2);
+      padding: 14px 32px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      color: var(--text);
+      border-color: var(--text3);
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 48px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .stat-num {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -1px;
+    }
+
+    .stat-num span {
+      color: var(--accent);
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    /* Floating terminal */
+    .hero-terminal {
+      position: absolute;
+      right: 60px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 400px;
+      background: var(--bg2);
+      border: 1px solid var(--border2);
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      z-index: 2;
+      box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 212, 255, 0.1);
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+      0%,
+      100% {
+        transform: translateY(-50%) translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-50%) translateY(-12px);
+      }
+    }
+
+    .terminal-bar {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--bg3);
+    }
+
+    .t-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    .t-red {
+      background: #FF5F57;
+    }
+
+    .t-yellow {
+      background: #FEBC2E;
+    }
+
+    .t-green {
+      background: #28C840;
+    }
+
+    .terminal-title {
+      margin-left: 8px;
+      color: var(--text3);
+      font-size: 11px;
+    }
+
+    .terminal-body {
+      padding: 18px;
+      line-height: 2;
+    }
+
+    .t-comment {
+      color: var(--text3);
+    }
+
+    .t-key {
+      color: var(--accent);
+    }
+
+    .t-val {
+      color: var(--accent3);
+    }
+
+    .t-str {
+      color: var(--orange);
+    }
+
+    .t-num {
+      color: var(--purple);
+    }
+
+    .t-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 14px;
+      background: var(--accent);
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* SECTION COMMON */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 60px;
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 60px;
+      color: var(--text);
+    }
+
+    /* STACK */
+    .stack-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .stack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+      margin-top: 0;
+    }
+
+    .stack-item {
+      padding: 14px 18px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.2s;
+      cursor: default;
+    }
+
+    .stack-item:hover {
+      border-color: var(--accent);
+      background: rgba(0, 212, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .stack-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .stack-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text2);
+    }
+
+    .stack-categories {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+
+    .stack-cat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    /* PROJECTS */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2px;
+    }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 36px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .project-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .project-card:hover {
+      border-color: var(--border2);
+      background: var(--bg3);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.1em;
+      margin-bottom: 20px;
+    }
+
+    .project-name {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .project-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .project-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 24px;
+    }
+
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text3);
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
+
+    .project-card:hover .tag {
+      border-color: rgba(0, 212, 255, 0.2);
+      color: var(--text2);
+    }
+
+    .project-highlight {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent3);
+      border-left: 2px solid var(--accent3);
+      padding-left: 10px;
+      line-height: 1.5;
+    }
+
+    /* SERVICES */
+    .services-section {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    .service-card {
+      padding: 40px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: all 0.2s;
+    }
+
+    .service-card:hover {
+      background: var(--bg3);
+      border-color: var(--border2);
+    }
+
+    .service-icon {
+      font-size: 28px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .service-name {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .service-desc {
+      font-size: 13px;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .service-price {
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      color: var(--accent);
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--text2);
+      line-height: 1.8;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    .about-text p strong {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .about-aside {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .aside-block {
+      padding: 24px;
+      border: 1px solid var(--border);
+      background: var(--surface);
+    }
+
+    .aside-block-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--text3);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .aside-block-val {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.5px;
+    }
+
+    .aside-block-sub {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 4px;
+    }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .contact-section .section-label {
+      justify-content: center;
+    }
+
+    .contact-section .section-label::before {
+      display: none;
+    }
+
+    .contact-email {
+      font-family: 'Lora', Georgia, serif;
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 800;
+      letter-spacing: -2px;
+      color: var(--text);
+      text-decoration: none;
+      display: block;
+      margin: 20px 0 40px;
+      transition: color 0.2s;
+    }
+
+    .contact-email:hover {
+      color: var(--accent);
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      color: var(--text3);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      padding: 10px 20px;
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .social-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* FOOTER */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 24px 60px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.06em;
+    }
+
+    /* ANIMATIONS */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--border2);
+      border-radius: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent2);
+    }
+
+    @media (max-width: 1100px) {
+      .hero-terminal {
+        display: none;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 16px 24px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      section {
+        padding: 70px 24px;
+      }
+
+      .hero {
+        padding: 100px 24px 60px;
+      }
+
+      .hero-stats {
+        gap: 28px;
+        flex-wrap: wrap;
+      }
+
+      footer {
+        padding: 20px 24px;
+        flex-direction: column;
+        gap: 8px;
+        text-align: center;
+      }
+    }
+
+    /* EXPERIENCE */
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .exp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 36px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .exp-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--accent3));
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.3s;
+    }
+
+    .exp-card:hover::before {
+      transform: scaleY(1);
+    }
+
+    .exp-card:hover {
+      border-color: var(--border2);
+      background: var(--bg3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .exp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    .exp-company {
+      font-family: 'Lora', Georgia, serif;
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .exp-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .exp-duration {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--text3);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      padding: 6px 12px;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      flex-shrink: 0;
+    }
+
+    .exp-desc {
+      font-size: 14px;
+      color: var(--text2);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .exp-header {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .exp-duration {
+        align-self: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">FZ<span>.</span></div>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#stack">Stack</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">GET IN TOUCH →</a>
+  </nav>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-glow"></div>
+    <div class="hero-glow2"></div>
+    <div class="hero-content">
+      <!-- <div class="hero-tag">Available for new projects</div> -->
+      <h1>
+        <!-- Fahad<br> -->
+        <span class="line2">Fahad Zaman</span>
+      </h1>
+      <p class="hero-desc">
+        <strong>AI Engineer who ships.</strong> I read the papers and build the systems — 
+        <strong>Mamba with custom attention layers, Large Context Memory Module from Google's Titans paper, 
+        MAC architecture, SSMs, deep MLP networks, and custom attention mechanisms from scratch.</strong> 
+        Production side: <strong>LangGraph agents, RAG pipelines, Graph RAG, embedding models, 
+        vector databases, NLP classifiers.</strong> 4+ years. Two apps on the App Store. 
+        <strong>Shipping production-level ML models at 97%+ accuracy.</strong> 
+        I work directly with founders and I move fast.
+      </p>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">4<span>+</span></div>
+          <div class="stat-label">Years Building</div>
+        </div>
+        <div>
+          <div class="stat-num">✓</div>
+          <div class="stat-label">Memoir App</div>
+        </div>
+        <div>
+          <div class="stat-num">✓</div>
+          <div class="stat-label">I-Ching App</div>
+        </div>
+        <div>
+          <div class="stat-num">✓</div>
+          <div class="stat-label">AeonAnima</div>
+        </div>
+        <!-- <div>
+          <div class="stat-num">97.9<span>%</span></div>
+          <div class="stat-label">Production level Classifier Accuracy</div>
+        </div> -->
+        <div>
+          <div class="stat-num">6</div>
+          <div class="stat-label">Apps Shipped</div>
+        </div>
+        <div>
+          <div class="stat-num">10<span>+</span></div>
+          <div class="stat-label">AI Systems Built</div>
+        </div>
+      </div>
+
+      <!-- Terminal -->
+      <!-- <div class="hero-terminal">
+    <div class="terminal-bar">
+      <div class="t-dot t-red"></div>
+      <div class="t-dot t-yellow"></div>
+      <div class="t-dot t-green"></div>
+      <span class="terminal-title">fahad@ai-engineer ~ </span>
+    </div>
+    <div class="terminal-body">
+      <div><span class="t-comment"># AeonAnima classifier</span></div>
+      <div><span class="t-key">model</span> = <span class="t-str">XGBClassifier</span>(</div>
+      <div>&nbsp;&nbsp;<span class="t-key">n_estimators</span>=<span class="t-num">300</span>,</div>
+      <div>&nbsp;&nbsp;<span class="t-key">max_depth</span>=<span class="t-num">6</span>,</div>
+      <div>&nbsp;&nbsp;<span class="t-key">use_label_encoder</span>=<span class="t-val">False</span></div>
+      <div>)</div>
+      <div>&nbsp;</div>
+      <div><span class="t-comment"># result</span></div>
+      <div><span class="t-key">accuracy</span> = <span class="t-num">0.957</span> <span class="t-comment">✓</span></div>
+      <div><span class="t-key">precision</span> = <span class="t-num">0.94</span></div>
+      <div><span class="t-key">recall</span> = <span class="t-num">0.94</span></div>
+      <div>&nbsp;</div>
+      <div><span class="t-comment">$ </span><span class="t-cursor"></span></div>
+    </div>
+  </div> -->
+
+  </section>
+
+  <!-- STACK -->
+  <section class="stack-section" id="stack">
+    <div class="section-label">Technical Stack</div>
+    <div class="section-title">What I Build With</div>
+    <div class="stack-categories">
+      <div>
+        <div class="stack-cat-label">AI / ML</div>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">Transformer
+              Architectures</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">PyTorch</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">LangGraph</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">LangChain</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">Embeddings</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">Vector DBs</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">OpenAI API</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">Building ML Models</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">XGBoost</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">Mamba / SSM</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">Titan / MAC & LMM</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">Multi-Layer
+              Perceptron</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">LoRA / QLoRA</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00D4FF"></div><span class="stack-name">RAG Pipelines</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="stack-cat-label">Backend / Infra</div>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00FF88"></div><span class="stack-name">FastAPI</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00FF88"></div><span class="stack-name">PostgreSQL</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00FF88"></div><span class="stack-name">pgvector</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00FF88"></div><span class="stack-name">Redis</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00FF88"></div><span class="stack-name">MySQL</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00FF88"></div><span class="stack-name">Pinecone</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00FF88"></div><span class="stack-name">Nginx / PM2</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00FF88"></div><span class="stack-name">Docker</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#00FF88"></div><span class="stack-name">Gunicorn</span>
+          </div>
+
+        </div>
+      </div>
+      <div>
+        <div class="stack-cat-label">Frontend</div>
+        <div class="stack-grid">
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#FF8844"></div><span class="stack-name">Next.js</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#FF8844"></div><span class="stack-name">React</span>
+          </div>
+          <div class="stack-item">
+            <div class="stack-dot" style="background:#FF8844"></div><span class="stack-name">HTML/CSS/JS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+ <!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Work History</div>
+  <div class="section-title">Experience</div>
+  <div class="experience-list">
+
+    <div class="exp-card fade-in">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">HolisticTLC Corporation</div>
+          <div class="exp-role">Senior Full-Stack AI Developer & AI Team Lead</div>
+        </div>
+        <div class="exp-duration">Sep 2024 — Present · Bradenton, FL (Remote)</div>
+      </div>
+      <p class="exp-desc">
+        Leading a 6-developer team building enterprise AI applications across 100k+ lines of production code. Architected the Memoir Generation platform, an I-Ching AI application (60k+ LOC), and enterprise RAG systems with Qdrant/ChromaDB. Designed hybrid database infrastructure (MongoDB/MySQL) optimized for high-throughput real-time AI workloads. Established CI/CD workflows, code review processes, and team knowledge-sharing protocols.
+      </p>
+      <div class="exp-tags">
+        <span class="tag">LangGraph</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">RAG</span>
+        <span class="tag">Qdrant</span>
+        <span class="tag">ChromaDB</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">MySQL</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">Team Lead</span>
+        <span class="tag">VPS Deployment</span>
+      </div>
+    </div>
+
+    <div class="exp-card fade-in">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">German Automotive Tech Company</div>
+          <div class="exp-role">AI Engineer</div>
+        </div>
+        <div class="exp-duration">Sep 2023 — Sep 2024 · Remote (Germany)</div>
+      </div>
+      <p class="exp-desc">
+        Built an intelligent automotive data analysis system using RAG architecture and vector databases (Pinecone, FAISS) for automated vehicle data processing and similarity matching. Developed FastAPI-based RESTful APIs integrating AI models with frontend applications for real-time vehicle insights. Collaborated with German engineering teams to deliver scalable, high-precision automotive AI solutions.
+      </p>
+      <div class="exp-tags">
+        <span class="tag">RAG Architecture</span>
+        <span class="tag">Pinecone</span>
+        <span class="tag">FAISS</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">RESTful APIs</span>
+        <span class="tag">Automotive AI</span>
+        <span class="tag">Real-time Processing</span>
+      </div>
+    </div>
+
+    <div class="exp-card fade-in">
+      <div class="exp-header">
+        <div>
+          <div class="exp-company">Smart Tech Solutions</div>
+          <div class="exp-role">Machine Learning Intern</div>
+        </div>
+        <div class="exp-duration">Jun 2023 — Oct 2023 · Islamabad (On-Site)</div>
+      </div>
+      <p class="exp-desc">
+        Built ML models in Python, TensorFlow, and PyTorch achieving 15–20% prediction accuracy improvements through advanced pattern analysis. Developed NLP solutions using transformer models (BERT, GPT, T5) for text analysis and built production RAG systems with vector databases. Delivered end-to-end ML pipelines covering data preprocessing, feature engineering, and model deployment.
+      </p>
+      <div class="exp-tags">
+        <span class="tag">Python</span>
+        <span class="tag">TensorFlow</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">BERT</span>
+        <span class="tag">GPT</span>
+        <span class="tag">T5</span>
+        <span class="tag">RAG</span>
+        <span class="tag">Vector Databases</span>
+        <span class="tag">MLOps</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="section-label">Selected Work</div>
+    <div class="section-title">Projects</div>
+    <div class="projects-grid">
+
+      <div class="project-card fade-in">
+        <div class="project-num">01 / PRODUCTION</div>
+        <div class="project-name">AeonAnima</div>
+        <div class="project-role">Lead Engineer & Architect</div>
+        <p class="project-desc">
+          AI personality reflection platform. Users answer up to 557 questions across 7 psychological layers and
+          interact with a personalized inner advisor. Full production app — App Store & Google Play.
+        </p>
+        <div class="project-tags">
+          <span class="tag">FastAPI</span>
+          <span class="tag">LangGraph</span>
+          <span class="tag">LangChain</span>
+          <span class="tag">pgvector</span>
+          <span class="tag">ML Models</span>
+          <span class="tag">XGBoost</span>
+          <span class="tag">Redis</span>
+          <span class="tag">GPT-4o</span>
+          <span class="tag">PostgreSQL</span>
+        </div>
+        <div class="project-highlight">XGBoost classifier at 95%+ accuracy · 557-question personality engine · Shipped
+          iOS + Android</div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-num">02 / AI SYSTEM</div>
+        <div class="project-name">Titans MAC Memory</div>
+        <div class="project-role">Research & Implementation</div>
+        <p class="project-desc">
+          Deep implementation of Google's Titans MAC neural memory architecture. Custom TTT (Test-Time Training) with
+          seed/active brain files, embedding space alignment between OpenAI and Qwen models, and attention injection
+          experiments.
+        </p>
+        <div class="project-tags">
+          <span class="tag">PyTorch</span>
+          <span class="tag">MAC Architecture</span>
+          <span class="tag">Large Context Memory Module</span>
+          <span class="tag">MLP</span>
+          <span class="tag">Transformers</span>
+          <span class="tag">TTT</span>
+          <span class="tag">Attention</span>
+          <span class="tag">Embeddings</span>
+          <span class="tag">Qwen3</span>
+        </div>
+        <div class="project-highlight">Custom memory architecture · Embedding space alignment · Attention injection
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-num">03 / PRODUCTION</div>
+        <div class="project-name">TLC Memoir Service</div>
+        <div class="project-role">Lead AI Engineer</div>
+        <p class="project-desc">
+          AI-powered memoir generation platform. Chronological, thematic, and milestone formats with writer
+          impersonation system. Multi-language support including English, Simplified Chinese, and Traditional Chinese.
+        </p>
+        <div class="project-tags">
+          <span class="tag">FastAPI</span>
+          <span class="tag">Flask</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">MySQL</span>
+          <span class="tag">OpenAI</span>
+          <span class="tag">Streaming SSE</span>
+          <span class="tag">Vector DBs</span>
+          <span class="tag">Embeddings</span>
+          <span class="tag">Multi-language</span>
+        </div>
+        <div class="project-highlight">Streaming chapter generation · Writer impersonation · 3 languages</div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-num">04 / INFRASTRUCTURE</div>
+        <div class="project-name">Production VPS Setup</div>
+        <div class="project-role">DevOps Engineer</div>
+        <p class="project-desc">
+          Built and maintained full production infrastructure — IONOS primary VPS with Hostinger replica, PostgreSQL
+          streaming replication via SSH tunnels, Nginx, PM2, Fail2ban. Resolved a live DDoS/malware incident.
+        </p>
+        <div class="project-tags">
+          <span class="tag">PostgreSQL Replication</span>
+          <span class="tag">Nginx</span>
+          <span class="tag">PM2</span>
+          <span class="tag">Fail2ban</span>
+          <span class="tag">SSH Tunnels</span>
+        </div>
+        <div class="project-highlight">Live replication · DDoS mitigation · Zero-downtime deployment</div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-num">05 / AI SYSTEM</div>
+        <div class="project-name">Retail RAG Query System</div>
+        <div class="project-role">AI Engineer</div>
+        <p class="project-desc">
+          Production RAG chatbot connected directly to a live retail database. Answers natural language queries about
+          product availability, pricing, and stock levels in real time — every response grounded in live inventory data,
+          zero hallucinations.
+        </p>
+        <div class="project-tags">
+          <span class="tag">LangChain</span>
+          <span class="tag">RAG</span>
+          <span class="tag">Google PaLM</span>
+          <span class="tag">SQLite</span>
+          <span class="tag">Few-shot Learning</span>
+          <span class="tag">Python</span>
+        </div>
+        <div class="project-highlight">Live DB retrieval · Zero hallucinations · Natural language inventory interface
+        </div>
+      </div>
+
+      <div class="project-card fade-in">
+        <div class="project-num">06 / AI SYSTEM</div>
+        <div class="project-name">ReAct Agent RAG System</div>
+        <div class="project-role">Full-Stack AI Engineer</div>
+        <p class="project-desc">
+          Full-stack RAG system with a ReAct (Reasoning + Acting) agent, real-time Knowledge Base visualization, and
+          conversational UI. Ingests documents via URL, retrieves semantic context, and exposes the full step-by-step
+          reasoning trace in a collapsible sidebar.
+        </p>
+        <div class="project-tags">
+          <span class="tag">ReAct Agent</span>
+          <span class="tag">RAG</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">React</span>
+          <span class="tag">Python</span>
+          <span class="tag">Semantic Retrieval</span>
+        </div>
+        <div class="project-highlight">ReAct reasoning trace · Live document ingestion · Full-stack</div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services-section" id="services">
+    <div class="section-label">What I Offer</div>
+    <div class="section-title">Services</div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <span class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="4" fill="var(--accent)" />
+            <circle cx="20" cy="12" r="2.5" fill="var(--accent)" opacity="0.4" />
+            <circle cx="4" cy="12" r="2.5" fill="var(--accent)" opacity="0.4" />
+          </svg>
+        </span>
+        <div class="service-name">AI Agent & LangGraph Development</div>
+        <p class="service-desc">Production-ready AI agents, multi-step pipelines, RAG systems with vector search, and
+          streaming FastAPI backends. Clean, documented, engineer-ready deliverables.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="5" r="3" fill="var(--accent)" />
+            <circle cx="5" cy="17" r="3" fill="var(--accent)" opacity="0.5" />
+            <circle cx="19" cy="17" r="3" fill="var(--accent)" opacity="0.5" />
+          </svg>
+        </span>
+        <div class="service-name">NLP Classification & Taxonomy Refinement</div>
+        <p class="service-desc">Error analysis, refined decision rules, lightweight ML/LLM classifiers, and eval
+          notebooks with precision/recall/F1 per category. Built for founders who need precision.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="6" cy="6" r="2.5" fill="var(--accent)" opacity="0.4" />
+            <circle cx="18" cy="6" r="2.5" fill="var(--accent)" opacity="0.4" />
+            <circle cx="12" cy="12" r="4" fill="var(--accent)" />
+            <circle cx="6" cy="18" r="2.5" fill="var(--accent)" opacity="0.4" />
+            <circle cx="18" cy="18" r="2.5" fill="var(--accent)" opacity="0.4" />
+          </svg>
+        </span>
+        <div class="service-name">Transformer Attention Systems</div>
+        <p class="service-desc">Custom attention mechanisms, multi-head self-attention, cross-attention, and positional
+          encoding strategies. From architecture design to fine-tuning pre-trained transformer models for
+          domain-specific tasks.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="4" cy="12" r="2.5" fill="var(--accent)" opacity="0.4" />
+            <circle cx="10" cy="12" r="3" fill="var(--accent)" opacity="0.7" />
+            <circle cx="17" cy="12" r="4" fill="var(--accent)" />
+          </svg>
+        </span>
+        <div class="service-name">Mamba & State Space Models</div>
+        <p class="service-desc">S6 selective scan, SSM sequence modeling, and Mamba architecture implementation.
+          Linear-time sequence processing as a production alternative to attention — for long-context tasks where
+          transformers are too expensive.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="4" r="2.5" fill="var(--accent)" />
+            <circle cx="4" cy="14" r="2.5" fill="var(--accent)" />
+            <circle cx="20" cy="14" r="2.5" fill="var(--accent)" />
+            <circle cx="12" cy="20" r="2" fill="var(--accent)" opacity="0.4" />
+          </svg>
+        </span>
+        <div class="service-name">Titans / MAC Memory Architecture</div>
+        <p class="service-desc">Google's Titans MAC (Memory as a Context) implementation — Large Context Memory Module,
+          TTT (Test-Time Training), seed/active brain design, and embedding space alignment between OpenAI and local
+          models like Qwen.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="5" cy="12" r="3" fill="var(--accent)" opacity="0.5" />
+            <circle cx="12" cy="12" r="4" fill="var(--accent)" />
+            <circle cx="19" cy="8" r="2.5" fill="var(--accent)" opacity="0.4" />
+            <circle cx="19" cy="16" r="2.5" fill="var(--accent)" opacity="0.4" />
+          </svg>
+        </span>
+        <div class="service-name">RAG Pipelines & Vector Search</div>
+        <p class="service-desc">End-to-end retrieval-augmented generation — document ingestion, chunking strategies,
+          embedding pipelines, pgvector/Chroma/FAISS integration, and semantic search tuning for production accuracy.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="8" cy="8" r="3" fill="var(--accent)" opacity="0.5" />
+            <circle cx="16" cy="8" r="2" fill="var(--accent)" opacity="0.3" />
+            <circle cx="8" cy="16" r="2" fill="var(--accent)" opacity="0.3" />
+            <circle cx="16" cy="16" r="3.5" fill="var(--accent)" />
+          </svg>
+        </span>
+        <div class="service-name">Embeddings & Semantic Memory</div>
+        <p class="service-desc">Custom embedding workflows, vector store design, cross-model alignment (OpenAI ↔ local
+          models), and long-term memory systems using pgvector and MAC-style architectures.</p>
+      </div>
+
+      <div class="service-card">
+        <span class="service-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <circle cx="12" cy="12" r="3" fill="var(--accent)" />
+            <circle cx="12" cy="4" r="2" fill="var(--accent)" opacity="0.4" />
+            <circle cx="12" cy="20" r="2" fill="var(--accent)" opacity="0.4" />
+            <circle cx="4" cy="12" r="2" fill="var(--accent)" opacity="0.4" />
+            <circle cx="20" cy="12" r="2" fill="var(--accent)" opacity="0.4" />
+          </svg>
+        </span>
+        <div class="service-name">VPS & Production Deployment</div>
+        <p class="service-desc">Full server setup and hardening — Nginx reverse proxy, PM2/Gunicorn process management,
+          PostgreSQL replication via SSH tunnels, Fail2ban, and zero-downtime deployments on
+          IONOS/Hostinger/DigitalOcean.</p>
+      </div>
+
+    </div>
+  </section>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-label">Background</div>
+    <div class="section-title">About Me</div>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>
+          I'm a <strong>23-year-old AI engineer</strong> based in Pakistan, currently serving as COO and lead developer
+          at HolisticTLC Corporation. I've been building AI-powered applications for 3+ years, progressing from
+          foundational ML to senior-level full-stack AI engineering.
+        </p>
+        <p>
+          My work spans the full stack — from <strong>custom Transformer architectures and Mamba SSMs</strong> at the
+          research level, down to Flutter mobile apps and production DevOps. I've shipped two apps to the App Store and
+          Google Play, built live replication infrastructure, and trained classifiers that run in production at 95%+
+          accuracy.
+        </p>
+        <p>
+          I believe <strong>AI models are tools for accelerating implementation</strong>, not for thinking. I'm the
+          architect and decision-maker. I work best with founders who have a clear vision and need someone to own the
+          technical execution end-to-end.
+        </p>
+      </div>
+      <div class="about-aside">
+        <div class="aside-block">
+          <div class="aside-block-label">Current Role</div>
+          <div class="aside-block-val">COO & Lead Dev</div>
+          <div class="aside-block-sub">HolisticTLC Corporation</div>
+        </div>
+        <div class="aside-block">
+          <div class="aside-block-label">Location</div>
+          <div class="aside-block-val">Pakistan</div>
+          <div class="aside-block-sub">GMT+5 · Available worldwide</div>
+        </div>
+        <div class="aside-block">
+          <div class="aside-block-label">Availability</div>
+          <div class="aside-block-val" style="color: var(--accent3)">Accepting Projects</div>
+          <div class="aside-block-sub">Selective freelance & contract</div>
+        </div>
+        <div class="aside-block">
+          <div class="aside-block-label">Focus</div>
+          <div class="aside-block-val">AI & Full-Stack</div>
+          <div class="aside-block-sub">Production systems · AI · Backend</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact-section" id="contact">
+    <div class="section-label">Get In Touch</div>
+    <a href="mailto:your@email.com" class="contact-email">fahdzamanwrk@gmail.com</a>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/fahad-zaman-42b669312?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app"
+        class="social-link">↗ LINKEDIN</a>
+      <a href="https://github.com/Fahd-8" class="social-link">↗ GITHUB</a>
+      <a href="https://x.com/fadie_1?s=21" class="social-link">↗ TWITTER / X</a>
+      <a href="https://contra.com/s/rAoYqLNX-advanced-ml-model-training-and-architecture-design" class="social-link">↗
+        CONTRA</a>
+      <a href="https://www.upwork.com/freelancers/~0176edaf72083fa478" class="social-link">↗ UPWORK</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-text">© 2026 Fahad Zaman. All rights reserved.</div>
+    <div class="footer-text">AI ENGINEER · ISLAMABAD, PK</div>
+  </footer>
+
+  <script>
+    // Fade in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 100);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth active nav
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(section => {
+        if (window.scrollY >= section.offsetTop - 100) current = section.getAttribute('id');
+      });
+      navLinks.forEach(link => {
+        link.style.color = link.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+      });
+    });
+  </script>
+</body>
+
+</html>
